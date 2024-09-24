@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 class PesananController extends Controller
 {
@@ -28,6 +30,7 @@ class PesananController extends Controller
             $pesanan->status = $statusPesanan[$indexCurrentStatus + 1];
             $pesanan->save();
 
+            Log::info('Send email to '.$pesanan->email_pembeli.': status pesanan anda sekarang adalah '.$pesanan->status);
             return redirect()->back()->with('success', 'Status pesanan diubah.');
         }
 

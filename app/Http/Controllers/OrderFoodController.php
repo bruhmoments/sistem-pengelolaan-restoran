@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Pesanan;
 use App\Models\DetailPesanan;
+use Illuminate\Support\Facades\Log;
 
 class OrderFoodController extends Controller
 {
@@ -40,6 +41,8 @@ class OrderFoodController extends Controller
                 'subtotal' => $item['subtotal'],
             ]);
         }
+
+        Log::info('Send email to '.$validated['email_pembeli'].': Order has been placed, thank you for your order!');
 
         return response()->json($pesanan, 201);
     }
